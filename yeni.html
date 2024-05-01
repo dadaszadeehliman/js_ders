@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Text Input ile Sıralı Liste Oluşturma ve Silme</title>
+<style>
+  #text-list {
+    margin-top: 20px;
+  }
+  .list-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .delete-btn {
+    background-color: #ff6347;
+    color: #fff;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+  <input type="text" id="input-text" placeholder="Metin girin">
+  <button onclick="addToList()">Ekle</button>
+  <ol id="text-list">
+  </ol>
+
+  <script>
+    function addToList() {
+      var textInput = document.getElementById('input-text').value;
+      if (textInput.trim() !== '') {
+        var list = document.getElementById('text-list');
+        var listItem = document.createElement('li');
+        // listItem.className = 'list-item';
+        listItem.innerHTML = `
+          <span>${textInput}</span>
+          <button class="delete-btn" onclick="deleteItem(this)">Sil</button>
+        `;
+        list.appendChild(listItem);
+        document.getElementById('input-text').value = ''; // Input'u temizle
+      }
+    }
+
+    function deleteItem(element) {
+      var listItem = element.parentNode;
+      var list = listItem.parentNode;
+      list.removeChild(listItem);
+    }
+  </script>
+</body>
+</html>
